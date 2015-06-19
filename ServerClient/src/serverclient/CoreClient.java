@@ -16,23 +16,25 @@ import java.net.Socket;
  */
 public class CoreClient {
     
-    public void enviarMensagem(String msg) throws IOException{
+   public void enviarMensagem(String msg) throws IOException{
+    
+        try {
             
-       String mensagem="Teste";
-      
-      
-      try (Socket connection = new Socket ("127.0.0.1", 12345)) {
-            ObjectOutputStream saida = new ObjectOutputStream(connection.getOutputStream());
-            
-            mensagem = "Cliente: " + msg;
-            saida.writeObject(mensagem);
-            saida.flush();
-            
-            
-            saida.close();
-        }
-                    
-        }
-    }
+        String mensagem = "";
+        Socket connection = new Socket ("127.0.0.1", 12345);
+        
+        ObjectOutputStream saida = new ObjectOutputStream(connection.getOutputStream());
+        
+        mensagem = "Cliente: " + msg;
+        saida.writeObject(mensagem);
+        saida.flush();
+        
+        saida.close();
+        connection.close();
+        } catch (IOException e ) {
+            e.getMessage();            
+        }         
+    }    
+}
     
 

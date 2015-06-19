@@ -6,7 +6,13 @@
 
 package serverclient;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,13 +21,31 @@ import java.util.logging.Logger;
  * @author alunon
  */
 public class FrmClient extends javax.swing.JFrame {
+    
+     private InputStream input;
+    private OutputStream output;
+    private BufferedReader in;
+    private PrintStream out;
+    
+    
 
     /**
      * Creates new form FrmCliente
      */
     public FrmClient() {
         initComponents();
+    try {
+           Socket client = new Socket("127.0.0.1",1234);
+           
+           input = client.getInputStream();
+           output = client.getOutputStream();
+           
+        } catch (Exception e) {
+            e.getMessage();
+        } 
     }
+     
+ 
     
     
 
@@ -96,14 +120,21 @@ public class FrmClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
-       
-        CoreClient cli = new CoreClient();
+String mensagem;
+        
         try {
-            cli.enviarMensagem(jTextArea1.getText());
-        } catch (IOException ex) {
-            Logger.getLogger(FrmClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            in = new BufferedReader(new InputStreamReader(input));
+            out = new PrintStream(output);
+            
+            mensagem = this.mensagem2.getText();
+            out.println(mensagem);
+                        
+        } catch (Exception e) {
+            e.getMessage();
+        }      
+       
+        
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
