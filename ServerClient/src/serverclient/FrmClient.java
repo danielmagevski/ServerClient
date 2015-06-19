@@ -35,7 +35,7 @@ public class FrmClient extends javax.swing.JFrame {
     public FrmClient() {
         initComponents();
     try {
-           Socket client = new Socket("127.0.0.1",1234);
+           Socket client = new Socket("127.0.0.1",12345);
            
            input = client.getInputStream();
            output = client.getOutputStream();
@@ -126,7 +126,7 @@ String mensagem;
             in = new BufferedReader(new InputStreamReader(input));
             out = new PrintStream(output);
             
-            mensagem = this.mensagem2.getText();
+            mensagem = this.jTextArea1.getText();
             out.println(mensagem);
                         
         } catch (Exception e) {
