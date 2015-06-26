@@ -21,7 +21,7 @@ public class CoreClient {
         try {
             
         String mensagem = "";
-        Socket connection = new Socket ("127.0.0.1", 12345);
+        Socket connection = new Socket ("192.168.4.117", 1234);
         
         ObjectOutputStream saida = new ObjectOutputStream(connection.getOutputStream());
         
